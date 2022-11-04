@@ -22,24 +22,15 @@
     position: relative;
     flex-grow: 1;
     height: 500px;
-    background-image: url('https://picsum.photos/1000/500');
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 50px;
     overflow: hidden;
     cursor: pointer;
-    transition: flex 0.5s ease-in-out;
+    transition: flex 1s ease-in-out;
 }
 #container .panel.active {
     flex-grow: 10;
-}
-#container .panel.active section {
-    top: calc(100% - 60px);
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 5px;
-    transition: all 0.5s ease-in-out 0.3s;
 }
 
 #container .panel section {
@@ -52,7 +43,14 @@
     opacity: 0;
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.5);
-    transition: all 0.5s ease-in-out 0.3s;
+    transition: all 1s ease-in-out;
+}
+#container .panel.active section {
+    top: calc(100% - 60px);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
 }
 
 .show {
@@ -65,10 +63,15 @@
 }
 
 #container .panel section a {
+    display: none;
     text-decoration: none;
-    color: lightgray;
+    color: skyblue;
     font-size: 16px;
     cursor: pointer;
+}
+
+#container .panel section.show a {
+    display: inline;
 }
 
 /* @media (max-width: 768px) {
