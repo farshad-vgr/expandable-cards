@@ -1,64 +1,72 @@
 const mainContainer = document.getElementById("container");
 
-const xhr = new XMLHttpRequest();
+// Fetching data from an URL
+async function fetchDate() {
+	try {
+		const response = await fetch("https://picsum.photos/v2/list"); // Array of 30 objects
+		const data = await response.json();
 
-xhr.open("GET", "https://picsum.photos/v2/list");
+		// Checking response status to be ok
+		if (response.ok && response.status === 200) {
+      const images = [];
+      
+      console.log(data);
 
-xhr.onload = function () {
-	if (xhr.status == 200) {
-		const images = JSON.parse(xhr.responseText).splice(10, 5);
+			// Picking 5(number of image slots) projects from the fetched array
+			for (let i = 0; i < 5; i++) {
+				let randomImage = data[Math.floor(Math.random() * data.length)];
+				images.push(randomImage); // Putting each image into an array
+			}
 
-		for (const image of images) {
-			const html = `
-            <p>Author: <br> ${image.author}</p>
-            <a href="${image.url}" target="_blank">visit page!</a>
-          `;
+			for (const image of images) {
+				const html = `
+			            <p>Author: <br> <small>${image.author}<small></p>
+			            <a href="${image.url}" target="_blank">Visit Page!</a>
+			          `;
+				const section = document.createElement("section");
+				section.classList.add("show");
+				section.innerHTML = html;
 
-			const section = document.createElement("section");
-			section.classList.add("show");
-			section.innerHTML = html;
+				const article = document.createElement("article");
+				article.classList.add("panel");
+        article.style.backgroundImage = `url('${image.download_url}')`;
+        article.style.backgroundPosition = "center center";
+        article.style.backgroundSize = "57rem 31rem"
+				article.append(section);
+				mainContainer.append(article);
 
-			const article = document.createElement("article");
-			article.classList.add("panel");
-			article.style.backgroundImage = `url('${image.download_url}')`;
+				article.addEventListener("click", () => {
+					const cards = [...document.querySelectorAll(".panel")];
+					const sections = [...document.querySelectorAll(".panel section")];
 
-			article.append(section);
-			mainContainer.append(article);
+					if (article.classList.contains("active")) {
+						article.classList.remove("active");
 
-			article.addEventListener("click", () => {
-				const cards = [...document.querySelectorAll(".panel")];
-				const sections = [...document.querySelectorAll(".panel section")];
+						// Adding "show" class to sections
+						for (const section of sections) {
+							section.classList.add("show");
+						}
+					} else {
+						// Removing "active" class from cards
+						for (const card of cards) {
+							card.classList.remove("active");
+						}
 
-				function removeActiveClass() {
-					for (const card of cards) {
-						card.classList.remove("active");
+						article.classList.add("active");
+
+						// Removing "show" class from sections
+						for (const section of sections) {
+							section.classList.remove("show");
+						}
+
+						article.querySelector("section").classList.add("show");
 					}
-				}
-
-				function removeShowClass() {
-					for (const section of sections) {
-						section.classList.remove("show");
-					}
-				}
-
-				function addShowClass() {
-					for (const section of sections) {
-						section.classList.add("show");
-					}
-				}
-
-				if (article.classList.contains("active")) {
-					article.classList.remove("active");
-					addShowClass();
-				} else {
-					removeActiveClass();
-					article.classList.add("active");
-					removeShowClass();
-					article.querySelector("section").classList.add("show");
-				}
-			});
+				});
+			}
 		}
+	} catch (error) {
+		alert("Fetching Error:\n" + error);
 	}
-};
+}
 
-xhr.send();
+fetchDate();
