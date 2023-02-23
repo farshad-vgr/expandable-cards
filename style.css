@@ -43,7 +43,7 @@ body {
 	height: 31rem;
 	background-repeat: no-repeat;
 	background-position: center;
-	border-radius: 3rem;
+	border-radius: 3.5rem;
 	overflow: hidden;
 	transition: flex 1s ease-in-out;
 	cursor: pointer;

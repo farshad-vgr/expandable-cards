@@ -9,8 +9,6 @@ async function fetchDate() {
 		// Checking response status to be ok
 		if (response.ok && response.status === 200) {
       const images = [];
-      
-      console.log(data);
 
 			// Picking 5(number of image slots) projects from the fetched array
 			for (let i = 0; i < 5; i++) {
@@ -31,7 +29,7 @@ async function fetchDate() {
 				article.classList.add("panel");
         article.style.backgroundImage = `url('${image.download_url}')`;
         article.style.backgroundPosition = "center center";
-        article.style.backgroundSize = "57rem 31rem"
+        article.style.backgroundSize = "58rem 31rem"
 				article.append(section);
 				mainContainer.append(article);
 
