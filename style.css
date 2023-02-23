@@ -1,8 +1,17 @@
+@font-face {
+    font-family: "Shantell";
+    src: url("./assets/fonts/ShantellSans-Regular.ttf");
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     cursor: default;
+}
+
+body {
+    font-family: "Shantell", sans-serif;
 }
 
 #container {
@@ -73,9 +82,3 @@
 #container .panel section.show a {
     display: inline;
 }
-
-/* @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-} */
