@@ -69,6 +69,7 @@ async function fetchDate() {
 				article.classList.add("panel");
 				article.style.backgroundImage = `url('${image.download_url}')`;
 				article.style.backgroundSize = "cover";
+				article.style.backgroundPosition = "center";
 				article.append(section);
 				mainContainer1.append(article);
 
